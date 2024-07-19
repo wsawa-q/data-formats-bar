@@ -1,0 +1,56 @@
+Group: T3G1
+Members: Tatiana Golysheva, Mariia Chinkova, Yervand Arzumanyan, Valeriia Kurinna
+
+Concept model of a bar network
+
+Bar: a place, where you can take some cocktails and have your free time.
+The Bar always has a Name (data type = text) and Wifi (data type = boolean value), it follows that not every bar has wi-fi.
+Connections:
+-> Bar (1…*) — has — (1…1) Menu 
+Each bar can have only one Menu, but one Menu can be in several bars. 
+
+-> Bar (1…*) — located — (1…1) Address
+The bar has at least one address or more. Every address is unique for each bar.
+
+-> Bar (1…1) — equipped — (0…1) Garden
+The bar can have a garden, but it’s not necessary. 
+
+-> Bar (0…*) — visits — (0…*) Client
+The bar can have clients. 
+
+-> Bar (1…1) — works — (0…*) Employee
+The bar hires employees. Each employee must work in a certain bar. 
+
+
+Menu: a list with drinks which are in the repertoire of the bar.
+
+Connections:
+-> Menu (0…*) — has — (0…*) Drink
+The menu can have an unlimited number of drinks. Also, drinks can be in several menus.
+
+Drink: it's a drink, which you can order from Menu.
+Each drink has a specific Name (data type = text), Percentage — percent of alcohol (data type = number between 0 and 1, where 0 means no alcohol and 1 means 100% alcohol) and a type.
+
+Type: it's a type of a Drink such as “long drink”, “shots” atd., which you can find in the menu. Every type has its Name (data type = text) and Size in ml (data type = number). 
+
+Connections:
+-> Drink (0…*) — typed — (1…1) Type
+Each drink has a type. There can be several drinks of the same type.
+
+
+Address: a mandatory information about each bar. This information includes the Country (data type = text), where the bar is located, City (data type = text), Street (data type = text), HouseNumber (data type = number) and PostCode (data type = number).
+
+Terrace: the bar may have an additional area - Terrace. It has an attribute Open (data type = boolean value), which means, that the terrace can be covered by canopies or not.
+Also, each Terrace has different Size (data type = number) in square meters.
+
+
+Inheritance connections:
+-> Client — Person
+-> Employee — Person
+
+Now all clients and employees are people. They have specific GivenName (data type = text), FamilyName (data type = text), Phone number (data type = text), which isn’t necessary, and an Age (data type = number).
+Also, each employee has his own working Title (data type = text) and a certain Wage (data type = number) crown per hour. 
+
+Employee: is a person, who works in the bar.
+
+Client: is a Person, who visits the bar.

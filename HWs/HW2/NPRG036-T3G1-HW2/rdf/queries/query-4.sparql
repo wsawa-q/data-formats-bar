@@ -1,0 +1,39 @@
+prefix voc: <http://bestbars.org/vocabulary/> 
+
+prefix mn: <http://bestbars.org/menu/> 
+prefix dr: <http://bestbars.org/drink/>
+prefix tp: <http://bestbars.org/type/> 
+prefix em: <http://bestbars.org/employee/> 
+prefix pr: <http://bestbars.org/person/> 
+prefix cl: <http://bestbars.org/client/> 
+prefix ad: <http://bestbars.org/address/> 
+prefix tr: <http://bestbars.org/terrace/> 
+prefix br:  <http://bestbars.org/bar/> 
+
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+# Given name, phone number and bar name where all employees work in a bar with open terrace, even if they don't have a phone number
+SELECT ?givenName ?phone ?bar
+WHERE {
+	?employee a voc:Employee ;
+  		voc:givenName ?givenName ;
+  		voc:bar ?bar .
+    	OPTIONAL { ?employee voc:phone ?phone }
+  	{
+    	SELECT ?bar ?employee ?tr
+    	WHERE {
+      		?bar a voc:Bar ;
+    			voc:terrace ?tr
+      		{
+        		SELECT ?bar ?tr
+        		WHERE {
+        			?tr a voc:Terrace ;
+       					voc:open true
+        		}
+      		}
+    	}
+  	}
+}

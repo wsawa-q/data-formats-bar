@@ -1,0 +1,360 @@
+@prefix voc: <http://bestbars.org/vocabulary/> .
+
+@prefix mn: <http://bestbars.org/menu/> .
+@prefix dr: <http://bestbars.org/drink/> .
+@prefix tp: <http://bestbars.org/type/> .
+@prefix em: <http://bestbars.org/employee/> .
+@prefix pr: <http://bestbars.org/person/> .
+@prefix cl: <http://bestbars.org/client/> .
+@prefix ad: <http://bestbars.org/address/> .
+@prefix tr: <http://bestbars.org/terrace/> .
+@prefix br:  <http://bestbars.org/bar/> .
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+# CLASSES
+voc:Person rdf:type rdfs:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:comment "class represents people"@en ;
+    rdfs:subClassOf foaf:Person .
+
+voc:Employee rdf:type rdfs:Class ;
+    rdfs:label "Employee"@en ;
+    rdfs:comment "is a person, who works in the bar"@en ;
+    rdfs:subClassOf voc:Person .
+
+voc:Client rdf:type rdfs:Class ;
+    rdfs:label "Client"@en ;
+    rdfs:comment "is a Person, who visits the bar"@en ;
+    rdfs:subClassOf voc:Person .
+
+voc:Menu rdf:type rdfs:Class ;
+    rdfs:label "Menu"@en ;
+    rdfs:comment "a list with drinks which are in the repertoire of the bar"@en .
+
+voc:Drink rdf:type rdfs:Class ;
+    rdfs:label "Drink"@en ;
+    rdfs:comment "it's a drink, which you can order from Menu"@en .
+
+voc:Address rdf:type rdfs:Class ;
+    rdfs:label "Address"@en ;
+    rdfs:comment "a mandatory information about each bar"@en .
+
+voc:Type rdf:type rdfs:Class ;
+    rdfs:label "Type"@en ;
+    rdfs:comment "it's a type of a Drink such as “long drink”, “shots” atd., which you can find in the menu"@en .
+
+voc:Bar rdf:type rdfs:Class ;
+    rdfs:label "Bar"@en ;
+    rdfs:comment "a place, where you can take some cocktails and have your free time"@en .
+
+voc:Terrace rdf:type rdfs:Class ;
+    rdfs:label "Terrace"@en ;
+    rdfs:comment "the bar may have an additional area like Terrace"@en .
+
+
+# PROPERTIES
+voc:open rdf:type rdf:Property ;
+    rdfs:label "open"@en ;
+    rdfs:comment "when terrace with or without roof/covered or not covered"@en ;
+    rdfs:range xsd:boolean .
+
+voc:size rdf:type rdf:Property ;
+    rdfs:label "size"@en ;
+    rdfs:comment "terrace area in square meters"@en ;
+    rdfs:range xsd:double .
+
+voc:name rdf:type rdf:Property ;
+    rdfs:label "name"@en ;
+    rdfs:comment "cocktail's name"@en ;
+    rdfs:subPropertyOf foaf:name .
+
+voc:percentage rdf:type rdf:Property ;
+    rdfs:label "percentage"@en ;
+    rdfs:comment "alcohol content in the cocktail as a percentage"@en ;
+    rdfs:domain voc:Drink ;
+    rdfs:range xsd:double .
+
+voc:volume rdf:type rdf:Property ;
+    rdfs:label "volume"@en ;
+    rdfs:comment "cocktail volume"@en ;
+    rdfs:range xsd:double .
+
+voc:wifi rdf:type rdf:Property ;
+    rdf:label "wifi"@en ;
+    rdfs:comment "availability of wi-fi"@en ;
+    rdfs:range xsd:boolean .
+
+voc:title rdf:type rdf:Property ;
+    rdf:label "title"@en ;
+    rdfs:comment "a label your company gives employee"@en .
+
+voc:wage rdf:type rdf:Property ;
+    rdf:label "wage"@en ;
+    rdfs:comment "a fixed regular payment earned for work or services"@en ;
+    rdfs:range xsd:decimal .
+
+voc:country rdf:type rdf:Property ;
+    rdfs:label "country"@en ;
+    rdfs:comment "a distinct part of the world, such as a state, nation"@en ;
+    rdfs:subPropertyOf xsd:string .
+
+voc:city rdf:type rdf:Property ;
+    rdfs:label "city"@en ;
+    rdfs:comment "a large human settlement"@en ;
+    rdfs:subPropertyOf xsd:string .
+
+voc:street rdf:type rdf:Property ;
+    rdfs:label "street"@en ;
+    rdfs:comment "a public thoroughfare in a built environment"@en ;
+    rdfs:subPropertyOf xsd:string .
+
+voc:houseNumber rdf:subPropertyOf rdf:Property ;
+    rdfs:label "houseNumber"@en ;
+    rdfs:comment "a unique number of each building in a street or area to locate a particular building"@en ;
+    rdfs:range xsd:unsignedInt .
+
+voc:postCode rdf:type rdf:Property ;
+    rdfs:label "postCode"@en ;
+    rdfs:comment "a group of numbers or letters and numbers which are added to a postal address to assist the sorting of mail"@en ;
+    rdfs:subPropertyOf xsd:string .
+
+voc:givenName rdf:type rdf:Property ;
+    rdfs:label "givenName"@en ;
+    rdfs:comment "a personal name given to someone at birth "@en ;
+    rdfs:subPropertyOf foaf:givenName .
+
+voc:familyName rdf:type rdf:Property ;
+    rdfs:label "familyName"@en ;
+    rdfs:comment "the name that belongs to one’s family"@en ;
+    rdfs:subPropertyOf foaf:familyName .
+
+voc:phone rdf:type rdf:Property ;
+    rdfs:label "phone"@en ;
+    rdfs:comment "a 7 digit unique number used to identify mobile phones"@en ;
+    rdfs:subPropertyOf foaf:phone .
+
+voc:age rdf:type rdf:Property ;
+    rdfs:label "phone"@en ;
+    rdfs:comment "the length of time that a person has lived or a thing has existed"@en ;
+    rdfs:subPropertyOf xsd:unsignedInt .
+
+
+# RELATIONS
+voc:visits rdf:type rdf:Property ;
+    rdfs:label "visits"@en ;
+    rdfs:comment "The bar can have clients"@en ;
+	rdfs:range voc:Bar ;
+	rdfs:domain voc:Client .
+
+voc:contains rdf:type rdf:Property ;
+    rdfs:label "visits"@en ;
+    rdfs:comment "Each bar can have only one Menu, but one Menu can be in several bars"@en ;
+    rdfs:range voc:Drink ;
+    rdfs:domain voc:Menu .
+
+
+# OBJECTS
+### BAR ###
+br:1 a voc:Bar ;
+    voc:name "Rapture Morning"@en ;
+    voc:wifi false ;
+    voc:address ad:1 ;
+    voc:menu mn:3 ;
+    voc:terrace tr:3 .
+br:2 a voc:Bar ;
+    voc:name "Rapture Afternoon"@en ;
+    voc:wifi true ;
+    voc:address ad:2 ;
+    voc:menu mn:2 ;
+    voc:terrace tr:1 .
+
+br:3 a voc:Bar ;
+    voc:name "Rapture Evening"@en ;
+    voc:wifi true ;
+    voc:address ad:3 ;
+    voc:menu mn:1 ;
+    voc:terrace tr:2 .
+
+
+### DRINK ###
+dr:1 a voc:Drink ;
+   voc:name "Manhattan"@en ;
+   voc:percentage "33"^^xsd:double ;
+   voc:type tp:1 .
+
+dr:2 a voc:Drink ;
+   voc:name "Old Fashioned"@en ;
+   voc:percentage "40"^^xsd:double ;
+   voc:type tp:3 .
+
+dr:3 a voc:Drink ;
+   voc:name "Vodka Martini"@en ;
+   voc:percentage "38"^^xsd:double ;
+   voc:type tp:2 .
+
+dr:4 a voc:Drink ;
+   voc:name "Bloody Mary"@en ;
+   voc:percentage "22"^^xsd:double ;
+   voc:type tp:1 .
+
+dr:5 a voc:Drink ;
+   voc:name "Gin&Tonik"@en ;
+   voc:percentage "18"^^xsd:double ;
+   voc:type tp:1 .
+
+dr:6 a voc:Drink ;
+   voc:name "Princess"@en ;
+   voc:percentage "4"^^xsd:double ;
+   voc:type tp:3 .
+
+dr:7 a voc:Drink ;
+   voc:name "Sangria"@en ;
+   voc:percentage "8"^^xsd:double ;
+   voc:type tp:2 .
+
+### TYPE ###
+tp:1 a voc:Type ;
+   voc:name "long"@en ;
+   voc:volume "400"^^xsd:double .
+
+tp:2 a voc:Type ;
+   voc:name "middle"@en ;
+   voc:volume "250"^^xsd:double .
+
+tp:3 a voc:Type ;
+   voc:name "short"@en ;
+   voc:volume "50"^^xsd:double .
+
+
+### EMPLOYEE ###
+em:1 a voc:Employee ;
+   voc:title "waiter"@en ;
+   voc:wage "150"^^xsd:decimal ;
+   voc:givenName "Jack"@en ;
+   voc:familyName "Delfino"@en ;
+   voc:phone <tel:+420.123.978.541> ;
+   voc:age "27"^^xsd:unsignedInt  ;
+   voc:bar br:1 .
+
+em:2 a voc:Employee ;
+   voc:title "manager"@en ;
+   voc:wage "350"^^xsd:decimal ;
+   voc:givenName "Frank"@en ;
+   voc:familyName "Millstone"@en ;
+   voc:age "33"^^xsd:unsignedInt  ;
+   voc:bar br:2 .
+
+em:3 a voc:Employee ;
+   voc:title "bartender"@en ;
+   voc:wage "200"^^xsd:decimal ;
+   voc:givenName "Asher"@en ;
+   voc:familyName "Pratt"@en ;
+   voc:phone <tel:+420.125.423.111> ,  
+             <tel:+420.587.231.548> ;
+   voc:age "26"^^xsd:unsignedInt  ;
+   voc:bar br:3 .
+
+em:4 a voc:Employee ;
+   voc:title "hostess"@en ;
+   voc:wage "150"^^xsd:decimal ;
+   voc:givenName "Michaela"@en ;
+   voc:familyName "Hampton"@en ;
+   voc:phone <tel:+420.875.222.365> ;
+   voc:age "24"^^xsd:unsignedInt ;
+   voc:bar br:1 .
+
+em:5 a voc:Employee ;
+   voc:title "cleaner"@en ;
+   voc:wage "170"^^xsd:decimal ;
+   voc:givenName "Oliver"@en ;
+   voc:familyName "Keating"@en ;
+   voc:phone <tel:+420.874.125.896> ;
+   voc:age "23"^^xsd:unsignedInt  ;
+   voc:bar br:3 .
+
+
+### CLIENT ###
+cl:1 a voc:Client ;
+   voc:givenName "Annalise"@en ;
+   voc:familyName "Keating"@en ;
+   voc:phone <tel:+420.785.469.854> ;
+   voc:age "43"^^xsd:unsignedInt  ;
+   voc:visits br:1 , br:2 .
+
+cl:2 a voc:Client ;
+   voc:givenName "Laurel"@en ;
+   voc:familyName "Castillo"@en ;
+   voc:phone <tel:+420.985.632.147> ;
+   voc:age "25"^^xsd:unsignedInt  ;
+   voc:visits br:1 , br:2 .
+
+cl:3 a voc:Client ;
+   voc:givenName "Connor"@en ;
+   voc:familyName "Walsh"@en ;
+   voc:phone <tel:+420.874.589.652> ;
+   voc:age "26"^^xsd:unsignedInt  .
+
+cl:4 a voc:Client ;
+   voc:givenName "Wes"@en ;
+   voc:familyName "Gibbins"@en ;
+   voc:phone <tel:+420.876.325.896> ;
+   voc:age "20"^^xsd:unsignedInt  ;
+   voc:visits br:1 , br:2 , br:3 .
+
+cl:5 a voc:Client ;
+   voc:givenName "Rebecca"@en ;
+   voc:familyName "Sutter"@en ;
+   voc:phone <tel:+420.245.896.574> ;
+   voc:age "18"^^xsd:unsignedInt  ;
+   voc:visits br:1 .
+
+### ADRESS ###
+ad:1 a voc:Address ;
+   voc:country "Czech Republic"@en ;
+   voc:city "Prague"@en ;
+   voc:street "Manesova"@en ;
+   voc:houseNumber "64"^^xsd:unsignedInt ;
+   voc:postCode "12000"@en .
+
+ad:2 a voc:Address ;
+   voc:country "Czech Republic"@en ;
+   voc:city "Prague"@en ;
+   voc:street "U Milosrdnych"@en ;
+   voc:houseNumber "851"^^xsd:unsignedInt ;
+   voc:postCode "11000"@en .
+
+ad:3 a voc:Address ;
+   voc:country "Czech Republic"@en ;
+   voc:city "Prague"@en ;
+   voc:street "V Kolkovne"@en ;
+   voc:houseNumber "920"^^xsd:unsignedInt ;
+   voc:postCode "11000"@en .
+
+### TERRACE ###
+tr:1 a voc:Terrace ;
+    voc:open true ;
+    voc:size "150"^^xsd:double .
+
+tr:2 a voc:Terrace ;
+    voc:open true ;
+    voc:size "100"^^xsd:double .
+
+tr:3 a voc:Terrace ;
+    voc:open false ;
+    voc:size "50"^^xsd:double .
+
+### MENU ###
+mn:1 a voc:Menu ;
+    voc:contains dr:1 , dr:2 .
+
+mn:2 a voc:Menu ;
+    voc:contains dr:3 , dr:4 .
+    voc:contains dr:3 , dr:4 .
+
+mn:3 a voc:Menu ;
+    voc:contains dr:5 , dr:6 , dr:7 .

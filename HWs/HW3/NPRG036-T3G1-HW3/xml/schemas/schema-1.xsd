@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:voc="http://bestbars.org/vocabulary/"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://bestbars.org/vocabulary/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="https://www.w3.org/2009/01/xml.xsd" />
+
+    <xs:element name="Bars" type="voc:Bars"/>
+
+    <xs:complexType name="Bar">
+        <xs:sequence>
+            <xs:element name="name" type="voc:englishString"/>
+            <xs:element name="address" type="voc:Address"/>
+            <xs:element name="menu" type="voc:Menu"/>
+            <xs:element name="employees" type="voc:EmployeeList"/>
+            <xs:element name="customers" type="voc:CustomerList"/>
+            <xs:element name="terrace" type="voc:Terrace"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Person">
+        <xs:sequence>
+            <xs:element name="givenName" type="voc:englishString" />
+            <xs:element name="familyName" type="voc:englishString" />
+            <xs:element name="age" type="voc:age" />
+            <xs:element name="phone" minOccurs="0" maxOccurs="unbounded" type="voc:phone"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Employee">
+        <xs:complexContent>
+            <xs:extension base="voc:Person">
+                <xs:sequence>
+                    <xs:element name="title" type="voc:englishString" />
+                    <xs:element name="wage" type="voc:wage"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Customer">
+        <xs:complexContent>
+            <xs:extension base="voc:Person" />
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Address">
+        <xs:sequence>
+            <xs:element name="country" type="voc:englishString"/>
+            <xs:element name="city" type="voc:englishString"/>
+            <xs:element name="street" type="voc:englishString"/>
+            <xs:element name="houseNumber" type="voc:englishString"/>
+            <xs:element name="postCode" type="voc:englishString"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Terrace">
+        <xs:sequence>
+            <xs:element name="open" type="xs:boolean"/>
+            <xs:element name="size" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Menu">
+        <xs:sequence>
+            <xs:element name="drinks" type="voc:Drink"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Type">
+        <xs:sequence>
+            <xs:element name="name" type="voc:englishString"/>
+            <xs:element name="volume" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Drink">
+        <xs:sequence>
+            <xs:element name="name" type="voc:englishString"/>
+            <xs:element name="percentage" type="xs:decimal"/>
+            <xs:element name="type" type="voc:Type"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="englishString">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute ref="xml:lang" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="phone">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[+]?[0-9 ]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="wage">
+        <xs:attribute name="amount" type="xs:decimal"/>
+    </xs:complexType>
+
+    <xs:complexType name="age">
+        <xs:attribute name="amount" type="xs:decimal"/>
+    </xs:complexType>
+
+    <xs:complexType name="CustomerList">
+        <xs:sequence>
+            <xs:element name="customers" minOccurs="0" maxOccurs="unbounded" type="voc:Customer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EmployeeList">
+        <xs:sequence>
+            <xs:element name="employees" minOccurs="0" maxOccurs="unbounded" type="voc:Employee"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Bars">
+        <xs:sequence>
+            <xs:element name="bar" minOccurs="0" maxOccurs="unbounded" type="voc:Bar"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

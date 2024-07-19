@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:Bars
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xsi:schemaLocation="http://bestbars.org/vocabulary/ ./hierarchy.xsd"
+    xmlns:ns="http://bestbars.org/vocabulary/"
+    >
+
+    <ns:bar>
+        <ns:name xml:lang="en"></ns:name>
+        <ns:address>
+            <ns:country xml:lang="en"></ns:country>
+            <ns:city xml:lang="en"></ns:city>
+            <ns:street xml:lang="en"></ns:street>
+            <ns:houseNumber xml:lang="en"></ns:houseNumber>
+            <ns:postCode xml:lang="en"></ns:postCode>
+        </ns:address>
+        <ns:menu>
+            <ns:drinks>
+                <ns:name xml:lang="en"></ns:name>
+                <ns:percentage></ns:percentage>
+                <ns:type>
+                    <ns:name xml:lang="en"></ns:name>
+                    <ns:volume></ns:volume>
+                </ns:type>
+            </ns:drinks>
+        </ns:menu>
+        <ns:employees>
+            <ns:employee>
+                <ns:givenName xml:lang="en"></ns:givenName>
+                <ns:familyName xml:lang="en"></ns:familyName>
+                <ns:age amount=""/>
+                <ns:phone></ns:phone>
+                <ns:title xml:lang="en"></ns:title>
+                <ns:wage amount=""/>
+            </ns:employee>
+        </ns:employees>
+        <ns:customers>
+            <ns:customer>
+                <ns:givenName xml:lang="en"></ns:givenName>
+                <ns:familyName xml:lang="en"></ns:familyName>
+                <ns:age amount=""/>
+                <ns:phone></ns:phone>
+            </ns:custoemr>
+        </ns:customers>
+        <ns:terrace>
+            <ns:open></ns:open>
+            <ns:size></ns:size>
+        </ns:terrace>
+    </ns:bar>
+</ns:Bars>

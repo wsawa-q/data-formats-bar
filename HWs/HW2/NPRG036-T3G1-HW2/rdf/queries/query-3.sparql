@@ -1,0 +1,39 @@
+prefix voc: <http://bestbars.org/vocabulary/> 
+
+prefix mn: <http://bestbars.org/menu/> 
+prefix dr: <http://bestbars.org/drink/>
+prefix tp: <http://bestbars.org/type/> 
+prefix em: <http://bestbars.org/employee/> 
+prefix pr: <http://bestbars.org/person/> 
+prefix cl: <http://bestbars.org/client/> 
+prefix ad: <http://bestbars.org/address/> 
+prefix tr: <http://bestbars.org/terrace/> 
+prefix br:  <http://bestbars.org/bar/> 
+
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+# Return all the bar and the amount of drinks where there are drinks with precengages higher than 30%
+SELECT ?bar (COUNT(?drinks) AS ?amount)
+WHERE {
+    ?bar a voc:Bar ;
+  		voc:menu ?menu .
+  	{
+    	SELECT ?menu ?drinks
+    	WHERE {
+      		?menu a voc:Menu ;
+      			voc:contains ?drinks .
+          	{
+          		SELECT ?menu ?drinks
+         		WHERE {
+                    ?drinks a voc:Drink ;
+                        voc:percentage ?percent .
+                    FILTER(?percent > 30)
+                } 		
+    		}
+    	}
+  	}
+}
+GROUP BY ?bar

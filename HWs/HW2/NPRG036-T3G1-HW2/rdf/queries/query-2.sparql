@@ -1,0 +1,40 @@
+prefix voc: <http://bestbars.org/vocabulary/> 
+
+prefix mn: <http://bestbars.org/menu/> 
+prefix dr: <http://bestbars.org/drink/>
+prefix tp: <http://bestbars.org/type/> 
+prefix em: <http://bestbars.org/employee/> 
+prefix pr: <http://bestbars.org/person/> 
+prefix cl: <http://bestbars.org/client/> 
+prefix ad: <http://bestbars.org/address/> 
+prefix tr: <http://bestbars.org/terrace/> 
+prefix br:  <http://bestbars.org/bar/> 
+
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+# All drinks of the bar where Asher Pratt works
+SELECT ?drinks
+WHERE {
+	?s a voc:Employee ;
+  		voc:givenName ?givenName ;
+  		voc:familyName ?familyName ;
+    	voc:bar ?bar .
+    FILTER(?givenName = "Asher"@en && ?familyName = "Pratt"@en) 
+  	{
+    	SELECT ?bar ?menu ?drinks
+    	WHERE {
+      		?bar a voc:Bar ;
+            	voc:menu ?menu .
+      			{		
+                    SELECT ?menu ?drinks 
+                    WHERE {
+                        ?menu a voc:Menu ;
+                            voc:contains ?drinks .
+                }
+      		}
+    	}
+  	}
+}

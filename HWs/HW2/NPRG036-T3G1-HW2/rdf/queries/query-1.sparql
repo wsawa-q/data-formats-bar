@@ -1,0 +1,33 @@
+prefix voc: <http://bestbars.org/vocabulary/> 
+
+prefix mn: <http://bestbars.org/menu/> 
+prefix dr: <http://bestbars.org/drink/>
+prefix tp: <http://bestbars.org/type/> 
+prefix em: <http://bestbars.org/employee/> 
+prefix pr: <http://bestbars.org/person/> 
+prefix cl: <http://bestbars.org/client/> 
+prefix ad: <http://bestbars.org/address/> 
+prefix tr: <http://bestbars.org/terrace/> 
+prefix br:  <http://bestbars.org/bar/> 
+
+prefix foaf: <http://xmlns.com/foaf/0.1/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+# Sum of wages of employees over 10 shifts each 12 hours in the MorningBar
+SELECT (SUM(?wage*120) AS ?Overall) ?bar
+WHERE {
+    ?sub a voc:Employee ;
+    voc:bar ?bar ;
+    voc:wage ?wage .
+    {
+  		SELECT ?bar 
+      	WHERE {
+  			?bar a voc:Bar ;
+  				voc:name ?name .
+  			FILTER (?name = "Rapture Morning"@en)
+      	}
+    }
+}
+GROUP BY ?bar
